@@ -3,6 +3,8 @@ package final_gui_calculator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.lang.Math;
 
@@ -22,17 +24,18 @@ public class CalculatorController {
     
     @FXML
     private String calculation;
-    
-   
-    
+
+
     //Adding the 0-9 buttons on a simple calculator
     
     @FXML
     void button0(ActionEvent event)  {
-    	if(!currentNumber.equals("")) {
-    		addNumber("0");
-    	} else
-    	addNumber("0");
+    	
+    		if(!currentNumber.equals("")) {
+        		addNumber("0");
+        	} else
+        	addNumber("0");
+    	
     }
     
     @FXML
@@ -102,29 +105,7 @@ public class CalculatorController {
     @FXML
     void onSquareRootClicked(ActionEvent event) {
     	
-//        if (!currentNumber.isEmpty()) {
-//            double number = Double.parseDouble(currentNumber);
-//            if (number >= 0) {
-//                double result = Math.sqrt(number);
-//                display.setText(String.valueOf(result));
-//                savedNumber.setText("√(" + currentNumber + ")");
-//            } else {
-//                display.setText("Error");
-//                savedNumber.setText("Cannot take square root of a negative number");
-//                resetCalculator();
-//            }
-//        } else if (!firstNumber.isEmpty()) {
-//            double number = Double.parseDouble(firstNumber);
-//            if (number >= 0) {
-//                double result = Math.sqrt(number);
-//                display.setText(String.valueOf(result));
-//                savedNumber.setText("√(" + firstNumber + ")");
-//            } else {
-//                display.setText("Error");
-//                savedNumber.setText("Cannot take square root of a negative number");
-//                resetCalculator();
-//            }
-//        }
+
     	   if (!firstNumber.isEmpty() && !currentNumber.isEmpty() && calculation == null) {
     	        firstNumber = String.valueOf(Math.sqrt(Double.parseDouble(firstNumber)));
     	        updateDisplay();
@@ -139,6 +120,26 @@ public class CalculatorController {
     	        updateSavedNumberDisplay();
     	    }
     }
+    
+    @FXML
+    void onPowerClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double base = Double.parseDouble(currentNumber);
+            double exponent = 2; // You can modify this to take input for the exponent from the user
+            double result = Math.pow(base, exponent);
+            display.setText(String.valueOf(result));
+            savedNumber.setText(currentNumber + "^" + exponent);
+            currentNumber = String.valueOf(result); // Update currentNumber with the result for further calculations
+        } else if (!firstNumber.isEmpty()) {
+            double base = Double.parseDouble(firstNumber);
+            double exponent = 2; // You can modify this to take input for the exponent from the user
+            double result = Math.pow(base, exponent);
+            display.setText(String.valueOf(result));
+            savedNumber.setText(firstNumber + "^" + exponent);
+            firstNumber = String.valueOf(result); // Update firstNumber with the result for further calculations
+        }
+    }
+
     //Add method to add numbers to the calculator
     void addNumber(String number) {
         currentNumber +=number;
