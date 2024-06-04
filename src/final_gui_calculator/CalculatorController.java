@@ -142,7 +142,7 @@ public class CalculatorController {
     
     @FXML
     void onPercentageClicked(ActionEvent event) {
-        // If there'Thas an ongoing calculation with a first number and current number
+        // If there's an ongoing calculation with a first number and current number
         if (!firstNumber.isEmpty() && !currentNumber.isEmpty() && calculation != null) {
             double firstNum = Double.parseDouble(firstNumber);
             double currentNum = Double.parseDouble(currentNumber);
@@ -158,7 +158,56 @@ public class CalculatorController {
         }
     }
 
+    @FXML
+    void onNegateClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = number * -1;
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        } else if (!firstNumber.isEmpty()) {
+            double number = Double.parseDouble(firstNumber);
+            double result = number * -1;
+            display.setText(String.valueOf(result));
+            firstNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
 
+    @FXML
+    void onLogClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = Math.log10(number);
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        } else if (!firstNumber.isEmpty()) {
+            double number = Double.parseDouble(firstNumber);
+            double result = Math.log10(number);
+            display.setText(String.valueOf(result));
+            firstNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
+
+    @FXML
+    void onLnClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = Math.log(number);
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        } else if (!firstNumber.isEmpty()) {
+            double number = Double.parseDouble(firstNumber);
+            double result = Math.log(number);
+            display.setText(String.valueOf(result));
+            firstNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
 
 
     //Add method to add numbers to the calculator
