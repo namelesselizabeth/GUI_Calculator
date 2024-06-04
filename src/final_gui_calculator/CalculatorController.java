@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 import java.lang.Math;
+import javafx.scene.control.TextArea;
+import java.util.List;
 
 public class CalculatorController {
 
@@ -23,6 +25,8 @@ public class CalculatorController {
     @FXML
     private String calculation;
 
+    @FXML
+    private TextArea historyTextArea;
 
     //Adding the 0-9 buttons on a simple calculator
     
@@ -68,7 +72,16 @@ public class CalculatorController {
     	addNumber(".");
     }
     
-    
+    //This Method updates the history with the last three calculation entries
+    public void updateHistoryTextArea() {
+    	List<String> lastThreeEntries = HistoryManager.getLastThreeEntries();
+    	StringBuilder historyText = new StringBuilder();
+    	for (String entry : lastThreeEntries) {
+    		historyText.append(entry).append("\n");
+    		
+    	}
+    	historyTextArea.setText(historyText.toString());
+    }
     //Clear the field
     @FXML
     void clearTextField(ActionEvent event) {
@@ -326,6 +339,8 @@ public class CalculatorController {
 
         currentNumber = "";
         calculation = null;
+        
+        updateHistoryTextArea();
     }
     
     void updateSavedNumberDisplay() {

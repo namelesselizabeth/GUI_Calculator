@@ -10,11 +10,15 @@ public class Gui_Calc extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Gui_Calc.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("Gui_Calc.fxml"));
+    	Parent root = loader.load();
         primaryStage.setTitle("GUI Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.setResizable(false);
+        
+        CalculatorController controller = loader.getController();
+        controller.updateHistoryTextArea();
     }
 
     public static void main(String[] args) {

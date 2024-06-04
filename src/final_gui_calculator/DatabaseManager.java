@@ -32,6 +32,9 @@ public class DatabaseManager {
 				ex.printStackTrace();
 			}
 		}
+		public static Connection getConnection() throws SQLException {
+		    return DriverManager.getConnection(url, user, password);
+		}
 
 	    public static void initializeDatabase() {
 	        try (Connection conn = DriverManager.getConnection(url, user, password)) {
