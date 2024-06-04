@@ -3,8 +3,6 @@ package final_gui_calculator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.lang.Math;
 
@@ -318,10 +316,14 @@ public class CalculatorController {
             }
             
         }
+        //Save the calculation to the database
+        DatabaseManager.saveCalculation(firstNumber, calculation, currentNumber, String.valueOf(calculatedNumber));
         
         firstNumber = String.valueOf(calculatedNumber);
         display.setText(firstNumber);
         savedNumber.setText(firstNumber);
+        
+
         currentNumber = "";
         calculation = null;
     }

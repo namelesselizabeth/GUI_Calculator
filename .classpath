@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="dist/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="dist/lib/javafx-swt.jar"/>
 	<classpathentry kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="C:/Program Files/MySQL/MSQL Connector/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

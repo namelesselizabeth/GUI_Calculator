@@ -18,6 +18,7 @@ public class Gui_Calc extends Application {
     }
 
     public static void main(String[] args) {
+ 
         launch(args);
     }
 }
