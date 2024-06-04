@@ -139,6 +139,27 @@ public class CalculatorController {
             firstNumber = String.valueOf(result); // Update firstNumber with the result for further calculations
         }
     }
+    
+    @FXML
+    void onPercentageClicked(ActionEvent event) {
+        // If there'Thas an ongoing calculation with a first number and current number
+        if (!firstNumber.isEmpty() && !currentNumber.isEmpty() && calculation != null) {
+            double firstNum = Double.parseDouble(firstNumber);
+            double currentNum = Double.parseDouble(currentNumber);
+            double percentage = (firstNum * currentNum) / 100;
+            currentNumber = String.valueOf(percentage);
+            display.setText(currentNumber);
+        } 
+        // If there's only a current number, convert it to a percentage
+        else if (!currentNumber.isEmpty()) {
+            double num = Double.parseDouble(currentNumber);
+            currentNumber = String.valueOf(num / 100);
+            display.setText(currentNumber);
+        }
+    }
+
+
+
 
     //Add method to add numbers to the calculator
     void addNumber(String number) {
