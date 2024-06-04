@@ -209,6 +209,45 @@ public class CalculatorController {
         }
     }
 
+    @FXML
+    void onPiClicked(ActionEvent event) {
+    	double pi = Math.PI;
+        addNumber(String.valueOf(pi));
+    }
+
+    @FXML
+    void onSineClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = Math.sin(Math.toRadians(number));
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
+
+    @FXML
+    void onCosineClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = Math.cos(Math.toRadians(number));
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
+
+    @FXML
+    void onTangentClicked(ActionEvent event) {
+        if (!currentNumber.isEmpty()) {
+            double number = Double.parseDouble(currentNumber);
+            double result = Math.tan(Math.toRadians(number));
+            display.setText(String.valueOf(result));
+            currentNumber = String.valueOf(result);
+            updateSavedNumberDisplay();
+        }
+    }
+
 
     //Add method to add numbers to the calculator
     void addNumber(String number) {
