@@ -14,6 +14,7 @@ public class Gui_Calc extends Application {
         primaryStage.setTitle("GUI Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        primaryStage.setResizable(false);
     }
 
     public static void main(String[] args) {
