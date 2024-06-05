@@ -18,7 +18,18 @@ public class Gui_Calc extends Application {
         primaryStage.setResizable(false);
         
         CalculatorController controller = loader.getController();
+        
+        controller.loadCalculatorState("calculator_state.ser");
+        
         controller.updateHistoryTextArea();
+        
+        primaryStage.setOnCloseRequest(event -> {
+            // Save calculator state before closing
+			controller.saveCalculatorState("calculator_state.ser");
+        });
+
+
+       
     }
 
     public static void main(String[] args) {

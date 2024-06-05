@@ -4,12 +4,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.Math;
 import javafx.scene.control.TextArea;
 import java.util.List;
 
-public class CalculatorController {
-
+public class CalculatorController implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     @FXML
     private TextField display;
 
@@ -342,25 +351,60 @@ public class CalculatorController {
         
         updateHistoryTextArea();
     }
-    
+
     void updateSavedNumberDisplay() {
+
         String textToShow = firstNumber;
-        if (calculation != null && !calculation.equals("√")) {
+
+        if (calculation != null) {
             textToShow += " " + calculation;
-        } 
-        if (currentNumber.isEmpty()) {
-        	textToShow += " " ;
         }
+
         if (!currentNumber.isEmpty()) {
-        	textToShow += " " + currentNumber;
+            textToShow += " " + currentNumber;
         }
-        
+
         savedNumber.setText(textToShow);
+        // Debug output to trace the state
+        System.out.println("First Number: " + firstNumber);
+        System.out.println("Calculation: " + calculation);
+        System.out.println("Current Number: " + currentNumber);
     }
+
     
-    void resetCalculator () {
-    	firstNumber ="";
-    	currentNumber = "";
-    	calculation = null;
+    // Method to serialize calculator state
+    public void saveCalculatorState(String fileName) {
+        try {
+            // Create the file if it doesn't exist
+            File file = new File(fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            // Write the calculator state to the file using object serialization
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
+                out.writeObject(firstNumber);
+                out.writeObject(currentNumber);
+                out.writeObject(calculation);
+            }
+        } catch (IOException e) {
+            // Handle any IO exceptions
+            e.printStackTrace();
+        }
     }
+
+
+    public void loadCalculatorState(String fileName) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
+            firstNumber = (String) in.readObject();
+            currentNumber = (String) in.readObject();
+            calculation = (String) in.readObject();
+            
+            updateDisplay();
+            updateSavedNumberDisplay();
+        } catch (IOException | ClassNotFoundException e) {
+            // Handle the case where the file doesn't exist or cannot be read
+            e.printStackTrace();
+        }
+    }
+
 }
